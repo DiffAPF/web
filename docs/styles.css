@@ -51,7 +51,7 @@
     font-weight: 600;
 }
 
-.signaltrain {
+.others {
     color: rgb(67,74,101);
     font-weight: 600;
 }
@@ -61,7 +61,7 @@
     font-weight: 600;
 }
 
-.lstm {
+.ours {
     color: rgb(89, 146, 54);
     font-weight: 600;
 }
