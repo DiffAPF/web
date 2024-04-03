@@ -313,10 +313,7 @@
                 </td>
             </tr>
         </table>
-
-        <div class="text-center">
-        <p class="text-center">No normalization has been applied.<br>&nbsp;</p>
-        </div>
+        <br>
 
         <h3 class="">Time-varying Subtractive Synthesizer (<em>Roland TB-303 Bass Line</em>)</h3>
         <hr>
@@ -583,7 +580,7 @@
         </table>
 
         <div class="text-center">
-        <p class="text-center">Individual samples were selected randomly from the test dataset. No normalization has been applied.<br>&nbsp;</p>
+        <p class="text-center">Individual samples were selected randomly from the test dataset.<br>&nbsp;</p>
         </div>
 
         <h3 class="">Feed-forward Compressor (<em>LA-2A Leveling Amplifier</em>)</h3>
@@ -591,56 +588,108 @@
 
         <div class="section mb-5">
             <p>
-                Compressor paragraphs
+                For our third experiment, we use our time domain filter to learn the parameters for the Universal Audio LA-2A analog compressor.
+                We optimise our proposed differentiable feed-forward compressor to match the target audio, examining its capability to replicate and infer the parameters of dynamic range controllers.
+                We train and evaluate our compressor on the <a href="https://zenodo.org/records/3824876" target="_blank">SignalTrain dataset</a>, which consists of paired data recorded in 44.1 kHz from the LA-2A compressor with different peak reduction values.
             </p>
         </div>
 
         <table class="table table-sm text-center" style="vertical-align: middle;">
             <tr>
-                <th>Effect</th>
-                <th>Dry</th>
-                <th><span class="target">Wet</span></th>
-                <th><span class="tcn">Extracted LFO</span></th>
-                <th><span class="lstm">LSTM-64</span></th>
-                <th><span class="signaltrain">Baseline</span></th>
+                <th>Configuration</th>
+                <th>Peak Reduction</th>
+                <th>Input</th>
+                <th><span class="target">Target</span></th>
+                <th><span class="ours">TD (Ours)</span></th>
+                <th><span class="others">FS</span></th>
             </tr>
 
             <tr>
-                <td class="passage">EGFx Phaser <p class="params">Example 1</p>
-                </td>
+                <td>LA-D</td>
+                <td>25</td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/egfx/7_egfx_dry.wav" type="audio/wav">
-                        Your browser does not support the audio element.
+                        <source src="audio/compressor/input_25.wav" type="audio/wav">
+                        Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/egfx/7_egfx_ph_wet.wav" type="audio/wav">
-                        Your browser does not support the audio element.
-                    </audio>
-                </td>
-                <td>
-                    <img class="img-fluid" src="img/7_egfx_ph_lstm_lfo.svg">
-                </td>
-                <td>
-                    <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/egfx/7_egfx_ph_lstm_wet_hat.wav" type="audio/wav">
-                        Your browser does not support the audio element.
+                        <source src="audio/compressor/target_25.wav" type="audio/wav">
+                        Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/egfx/7_egfx_ph_rand_wet_hat.wav" type="audio/wav">
-                        Your browser does not support the audio element.
+                        <source src="audio/compressor/ff_25.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/fs_25.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            <tr>
+                <td>LA-E</td>
+                <td>50</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/input_50.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/target_50.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/ff_50.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/fs_50.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            <tr>
+                <td>LA-F</td>
+                <td>75</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/input_75.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/target_75.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/ff_75.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/compressor/fs_75.wav" type="audio/wav">
+                        Unsupported browser.
                     </audio>
                 </td>
             </tr>
         </table>
-
-        <div class="text-center">
-        <p class="text-center">Samples were generated randomly from the test dataset. No normalization has been applied.<br>&nbsp;</p>
-        </div>
+        <br>
     </div>
 
     <div class="section" id="plugins">
