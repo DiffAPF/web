@@ -113,53 +113,209 @@
             </div>
             <div class="col-md-6">
                 <p>
-                    Phaser paragraphs.
+                    For our first experiment, we use our time domain filter to model the Electro-Harmonix SmallStone phaser pedal using the differentiable phaser architecture shown in Figure 2.
+                    The Electro-Harmonix SmallStone's circuit consists of four cascaded analog all-pass filters, a through-path for the input signal, and a feedback path which means it is topologically similar to our phaser implementation.
+                    The pedal consists of one knob which controls the LFO rate, and a switch that engages the feedback loop.
                 </p>
             </div>
         </div>
 
         <table class="table table-sm text-center" style="vertical-align: middle;">
             <tr>
-                <th>Effect</th>
-                <th>Dry</th>
-                <th><span class="target">Wet</span></th>
-                <th><span class="tcn">Extracted LFO</span></th>
-                <th><span class="lstm">LSTM-64</span></th>
-                <th><span class="signaltrain">Baseline</span></th>
+                <th>Parameter<br>Config.</th>
+                <th>LFO Rate</th>
+                <th>Feedback</th>
+                <th>Hop Size<br>L / F<sub>s</sub></th>
+                <th>Input</th>
+                <th><span class="target">Target</span></th>
+                <th><span class="ours">TD (Ours)</span></th>
+                <th><span class="others">FS</span></th>
             </tr>
 
             <tr>
-                <td class="passage">Melda Phaser <p class="params">Quasiperiodic LFO<br>Example 1</p>
-                </td>
+                <td>SS-A</td>
+                <td>≈ 2.3 Hz</td>
+                <td>off</td>
+                <td>10 ms</td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/melda/melda_ph_3_dry.wav" type="audio/wav">
-                        Your browser does not support the audio element.
+                        <source src="audio/phaser/input.wav" type="audio/wav">
+                        Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/melda/melda_ph_quasi_lstm_3_wet.wav" type="audio/wav">
-                        Your browser does not support the audio element.
+                        <source src="audio/phaser/ss-A_target.wav" type="audio/wav">
+                        Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/melda/melda_ph_quasi_lstm_3_wet_hat.wav" type="audio/wav">
-                        Your browser does not support the audio element.
+                        <source src="audio/phaser/ss-A_samples_out.wav" type="audio/wav">
+                        Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="audio/melda/melda_ph_quasi_rand_3_wet_hat.wav" type="audio/wav">
-                        Your browser does not support the audio element.
+                        <source src="audio/phaser/ss-A_frames_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            <tr>
+                <td>SS-B</td>
+                <td>≈ 0.6 Hz</td>
+                <td>off</td>
+                <td>40 ms</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/input.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-B_target.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-B_samples_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-B_frames_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            <tr>
+                <td>SS-C</td>
+                <td>≈ 0.09 Hz</td>
+                <td>off</td>
+                <td>160 ms</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/input.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-C_target.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-C_samples_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-C_frames_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            <tr>
+                <td>SS-D</td>
+                <td>≈ 1.4 Hz</td>
+                <td>on</td>
+                <td>10 ms</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/input.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-D_target.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-D_samples_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-D_frames_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            <tr>
+                <td>SS-E</td>
+                <td>≈ 0.4 Hz</td>
+                <td>on</td>
+                <td>40 ms</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/input.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-E_target.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-E_samples_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-E_frames_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            <tr>
+                <td>SS-F</td>
+                <td>≈ 0.06 Hz</td>
+                <td>on</td>
+                <td>160 ms</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/input.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-F_target.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-F_samples_out.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/phaser/ss-F_frames_out.wav" type="audio/wav">
+                        Unsupported browser.
                     </audio>
                 </td>
             </tr>
         </table>
 
         <div class="text-center">
-        <p class="text-center">Samples were selected randomly from the test dataset. No normalization has been applied.<br>&nbsp;</p>
+        <p class="text-center">No normalization has been applied.<br>&nbsp;</p>
         </div>
 
         <h3 class="">Time-varying Subtractive Synthesizer (<em>Roland TB-303 Bass Line</em>)</h3>
