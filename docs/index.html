@@ -27,7 +27,6 @@
                 <a href="https://yoyololicon.github.io/" target=”_blank”>Chin-Yun Yu</a> <sup>1</sup>,
                 <a href="https://christhetr.ee/" target=”_blank”>Christopher Mitcheltree</a> <sup>1</sup>,
                 <a href="https://www.linkedin.com/in/alistair-carson-a6178919a/" target=”_blank”>Alistair Carson</a> <sup>2</sup>,
-<!--                <br>-->
                 <a href="https://www.acoustics.ed.ac.uk/group-members/dr-stefan-bilbao/" target=”_blank”>Stefan Bilbao</a> <sup>2</sup>,
                 <a href="https://www.eecs.qmul.ac.uk/~josh/" target=”_blank”>Joshua D. Reiss</a> <sup>1</sup>, and
                 <a href="https://www.eecs.qmul.ac.uk/~gyorgyf/about.html" target=”_blank”>György Fazekas</a> <sup>1</sup>
@@ -40,12 +39,14 @@
 
             <div>
                 <a class="btn btn-outline-dark" href="docs/yu2024differentiable.pdf" target=”_blank” type="button">
-                    <i class="bi bi-newspaper"></i> Paper</a>
-<!--                <a class="btn btn-outline-dark" href="https://github.com/christhetree/all_pole_filters/" target=”_blank”-->
-<!--                   type="button">-->
-<!--                    <i class="bi bi-code-slash"></i> Code</a>-->
+                    <i class="bi bi-newspaper"></i> Paper
+                </a>
+                <a class="btn btn-outline-dark" href="https://github.com/yoyololicon/torchlpc" target=”_blank” type="button">
+                    <i class="bi bi-code-slash"></i> Code
+                </a>
                 <a class="btn btn-outline-dark" href="#plugins" type="button">
-                    <i class="bi bi-box"></i> Plugins</a>
+                    <i class="bi bi-box"></i> Plugins
+                </a>
 <!--                <a class="btn btn-outline-dark" href="https://youtu.be/nI_S7JTW_XI" target=”_blank” type="button">-->
 <!--                    <i class="bi bi-camera-reels"></i> Video</a>-->
             </div>
@@ -89,20 +90,13 @@
         <h2 class="">Listening Samples</h2>
         <hr>
         <div class="section mb-5">
-                <p>
-                    We provide listening examples for
-
-                </p>
-                <p>
-                    As discussed in more detail in the paper, we found
-
-                </p>
-                <p>
-                    This website is best viewed using a Chromium based browser or Firefox.
-                </p>
+            <p>
+                We provide listening examples for our experiments modeling a phaser (Electro-Harmonix Small Stone), a time-varying subtractive synthesizer (Roland TB-303 Bass Line), and a feedforward-compressor (LA-2A Leveling Amplifier).
+                All three systems are trained to model some target analog audio in an end-to-end fashion using gradient descent.
+            </p>
         </div>
 
-        <h3 class="">Phaser (<em>Electro-Harmonix Small Stone</em>)</h3>
+        <h3 class="">1. Phaser (<em>Electro-Harmonix Small Stone</em>)</h3>
         <hr>
         <div class="row mb-4">
             <div class="col-md-6 text-center">
@@ -126,10 +120,10 @@
                 <th>LFO Rate</th>
                 <th>Feedback</th>
                 <th>Hop Size<br>L / F<sub>s</sub></th>
-                <th>Input</th>
-                <th><span class="target">Target</span></th>
-                <th><span class="ours">TD (Ours)</span></th>
-                <th><span class="others">FS</span></th>
+                <th class="audio-col">Input</th>
+                <th class="audio-col"><span class="target">Target</span></th>
+                <th class="audio-col"><span class="ours">TD (Ours)</span></th>
+                <th class="audio-col"><span class="others">FS</span></th>
             </tr>
 
             <tr>
@@ -313,9 +307,12 @@
                 </td>
             </tr>
         </table>
-        <br>
 
-        <h3 class="">Time-varying Subtractive Synthesizer (<em>Roland TB-303 Bass Line</em>)</h3>
+        <div class="text-center">
+        <p class="text-center">Table scrolls horizontally if space is limited.<br>&nbsp;</p>
+        </div>
+
+        <h3 class="">2. Time-varying Subtractive Synthesizer (<em>Roland TB-303 Bass Line</em>)</h3>
         <hr>
         <div class="row mb-4">
             <div class="col-md-6 text-center">
@@ -326,25 +323,282 @@
             </div>
             <div class="col-md-6">
                 <p>
-                    Synth paragraphs.
+                    For our second experiment, we use our time domain filter to model the Roland TB-303 Bass Line synthesizer which defined the <a href="https://www.roland.com/uk/promos/303day/" target="_blank">acid house electronic music movement</a> of the late 1980s.
+                    The TB-303 is an ideal synth for our use case because its defining feature is a resonant low-pass filter where the cutoff frequency is modulated quickly using an envelope to create its signature squelchy, “liquid” sound.
+                    We model it using the time-varying subtractive synth architecture shown in Figure 3 which consists of three main components: a monophonic oscillator, a time-varying biquad filter, and a waveshaper for adding distortion to the output.
+                    The dataset is made from Sample Science’s royalty free <a href="https://www.samplescience.info/2022/05/abstract-303.html" target="_blank">Abstract 303 sample pack</a> consisting of 100 synth loops at 120 BPM recorded dry from a hardware TB-303 clone.
                 </p>
             </div>
         </div>
 
+        <div class="text-center">
+        <p class="text-center"><b>Table 2.1:</b> Entire test set concatenated together.</p>
+        </div>
+
         <table class="table table-sm text-center" style="vertical-align: middle;">
             <tr>
-                <th>Example Number</th>
-                <th>Filter Config.</th>
-                <th>Inference Method</th>
-                <th><span class="target">Target</span></th>
-                <th><span class="ours">TD (Ours)</span></th>
-                <th><span class="others">FS 128</span></th>
-                <th><span class="others">FS 256</span></th>
-                <th><span class="others">FS 512</span></th>
-                <th><span class="others">FS 1024</span></th>
-                <th><span class="others">FS 2048</span></th>
-                <th><span class="others">FS 4096</span></th>
-                <th><span class="others">LSTM 64</span></th>
+                <th>Filter<br>Config.</th>
+                <th>Inference<br>Method</th>
+                <th class="audio-col"><span class="target">Target</span></th>
+                <th class="audio-col"><span class="ours">TD (Ours)</span></th>
+                <th class="audio-col"><span class="others">FS 128</span></th>
+                <th class="audio-col"><span class="others">FS 256</span></th>
+                <th class="audio-col"><span class="others">FS 512</span></th>
+                <th class="audio-col"><span class="others">FS 1024</span></th>
+                <th class="audio-col"><span class="others">FS 2048</span></th>
+                <th class="audio-col"><span class="others">FS 4096</span></th>
+                <th class="audio-col"><span class="others">LSTM 64</span></th>
+            </tr>
+            
+            <tr>
+                <td>Coeff.</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Coeff.</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Low-pass</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_td_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Low-pass</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_fs_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>RNN</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lstm_64_all.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+        </table>
+
+        <div class="text-center">
+        <p class="text-center">Table scrolls horizontally if space is limited.<br>&nbsp;</p>
+        </div>
+
+        <div class="text-center">
+        <p class="text-center"><b>Table 2.2:</b> Five different test set audio clips repeated 16 times each for easier comparison.</p>
+        </div>
+
+        <table class="table table-sm text-center" style="vertical-align: middle;">
+            <tr>
+                <th>Example<br>Number</th>
+                <th>Filter<br>Config.</th>
+                <th>Inference<br>Method</th>
+                <th class="audio-col"><span class="target">Target</span></th>
+                <th class="audio-col"><span class="ours">TD (Ours)</span></th>
+                <th class="audio-col"><span class="others">FS 128</span></th>
+                <th class="audio-col"><span class="others">FS 256</span></th>
+                <th class="audio-col"><span class="others">FS 512</span></th>
+                <th class="audio-col"><span class="others">FS 1024</span></th>
+                <th class="audio-col"><span class="others">FS 2048</span></th>
+                <th class="audio-col"><span class="others">FS 4096</span></th>
+                <th class="audio-col"><span class="others">LSTM 64</span></th>
             </tr>
 
             <tr>
@@ -577,13 +831,937 @@
                     </audio>
                 </td>
             </tr>
+
+            <tr class="row-grey">
+                <td>2</td>
+                <td>Coeff.</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>2</td>
+                <td>Coeff.</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>2</td>
+                <td>Low-pass</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_td_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>2</td>
+                <td>Low-pass</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_fs_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>2</td>
+                <td>RNN</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lstm_64_2.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>3</td>
+                <td>Coeff.</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Coeff.</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Low-pass</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_td_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Low-pass</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_fs_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>RNN</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lstm_64_3.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            
+            <tr class="row-grey">
+                <td>4</td>
+                <td>Coeff.</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>4</td>
+                <td>Coeff.</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>4</td>
+                <td>Low-pass</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_td_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>4</td>
+                <td>Low-pass</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_fs_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr class="row-grey">
+                <td>4</td>
+                <td>RNN</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lstm_64_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>Coeff.</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Coeff.</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_128_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_256_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_512_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_1024_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_2048_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/coeff_fs_4096_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Low-pass</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_td_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Low-pass</td>
+                <td>FS</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_128_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_256_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_512_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_1024_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_2048_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lp_fs_4096_fs_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>RNN</td>
+                <td>TD</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/target_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/synth/lstm_64_5.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
         </table>
 
         <div class="text-center">
-        <p class="text-center">Individual samples were selected randomly from the test dataset.<br>&nbsp;</p>
+        <p class="text-center">Table scrolls horizontally if space is limited.<br>&nbsp;</p>
         </div>
 
-        <h3 class="">Feed-forward Compressor (<em>LA-2A Leveling Amplifier</em>)</h3>
+        <h3 class="">3. Feed-forward Compressor (<em>LA-2A Leveling Amplifier</em>)</h3>
         <hr>
 
         <div class="section mb-5">
@@ -596,12 +1774,12 @@
 
         <table class="table table-sm text-center" style="vertical-align: middle;">
             <tr>
-                <th>Configuration</th>
-                <th>Peak Reduction</th>
-                <th>Input</th>
-                <th><span class="target">Target</span></th>
-                <th><span class="ours">TD (Ours)</span></th>
-                <th><span class="others">FS</span></th>
+                <th>Config.</th>
+                <th>Peak<br>Reduction</th>
+                <th class="audio-col">Input</th>
+                <th class="audio-col"><span class="target">Target</span></th>
+                <th class="audio-col"><span class="ours">TD (Ours)</span></th>
+                <th class="audio-col"><span class="others">FS</span></th>
             </tr>
 
             <tr>
@@ -689,7 +1867,10 @@
                 </td>
             </tr>
         </table>
-        <br>
+
+        <div class="text-center">
+        <p class="text-center">Table scrolls horizontally if space is limited.<br>&nbsp;</p>
+        </div>
     </div>
 
     <div class="section" id="plugins">
@@ -702,21 +1883,17 @@
             <div class="col-md-6">
                 <p>
                     We make the trained effect models accessible using the
-                    <a href="https://neutone.ai" target=”_blank”>Neutone</a> plugin and SDK.
+                    <a href="https://neutone.ai" target=”_blank”>Neutone</a> platform and <a href="https://github.com/Neutone/neutone_sdk" target=”_blank”>SDK</a>.
                     This enables most users to experiment with the models via a real-time VST plugin in their preferred
-                    digital audio workstation (DAW) on arbitrary input audio. Older and / or slower CPUs may struggle
+                    digital audio workstation (DAW) on arbitrary input audio. Older CPUs may struggle
                     to run the models in real time.
                 </p>
                 <h5>Instructions:</h5>
                 <ol>
-                    <li><a href="https://neutone.ai/plugin/" target=”_blank”>Download</a> and install the Neutone
-                        plugin.
-                    </li>
+                    <li><a href="https://neutone.ai/fx" target=”_blank”>Download</a> and install the Neutone FX plugin.</li>
                     <li>Download a model file from the links below.</li>
                     <li>Open the plugin in your preferred digital audio workstation.</li>
-                    <li>Click on "load your own" at the top of the Neutone plugin interface and select one of the
-                        models you just downloaded.
-                    </li>
+                    <li>Click on "load your own" at the top of the Neutone FX plugin interface and select one of the models you just downloaded.</li>
 <!--                    <li>-->
 <!--                        Use the four custom knobs to control the model:-->
 <!--                        <ul>-->
@@ -734,6 +1911,7 @@
 <!--                </p>-->
                 <h5>Model Files:</h5>
                 <ul>
+                    <li>Coming soon</li>
 <!--                    <li><a href="neutone/melda_phaser_quasiperiodic.nm" download="melda_phaser_quasiperiodic.nm">Melda Phaser LSTM-64</a> (trained on quasiperiodic LFO)</li>-->
 <!--                    <li><a href="neutone/melda_flanger_quasiperiodic.nm" download="melda_flanger_quasiperiodic.nm">Melda Flanger LSTM-64</a> (trained on quasiperiodic LFO)</li>-->
 <!--                    <li><a href="neutone/melda_phaser_irregular.nm" download="melda_phaser_irregular.nm">Melda Phaser LSTM-64</a> (trained on irregular LFO)</li>-->
