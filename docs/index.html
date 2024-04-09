@@ -1885,6 +1885,9 @@
         <div class="row mb-4">
             <div class="col-md-6 text-center">
                 <img class="img-fluid" src="img/neutone.png">
+                <br>
+                <br>
+                <p>Figure 4: <em>The Neutone FX plugin user interface.</em></p>
             </div>
             <div class="col-md-6">
                 <p>
@@ -1894,12 +1897,14 @@
                     digital audio workstation (DAW) on arbitrary input audio. Older CPUs may struggle
                     to run the models in real time.
                 </p>
-                <h5>Instructions:</h5>
+                <h4>Instructions</h4>
                 <ol>
                     <li><a href="https://neutone.ai/fx" target=”_blank”>Download</a> and install the Neutone FX plugin.</li>
                     <li>Download a model file from the links below.</li>
                     <li>Open the plugin in your preferred digital audio workstation.</li>
                     <li>Click on "load your own" at the top of the Neutone FX plugin interface and select one of the models you just downloaded.</li>
+                    <li>Use the four custom knobs to control the model.</li>
+
 <!--                    <li>-->
 <!--                        Use the four custom knobs to control the model:-->
 <!--                        <ul>-->
@@ -1915,7 +1920,7 @@
 <!--                DAW's sample rate to the native sample rate of the models (44.1 kHz), and using a buffer size of 128-->
 <!--                samples or more.-->
 <!--                </p>-->
-                <h5>Model Files:</h5>
+                <h4>Phaser</h4>
                 <ul>
                     <li>Coming soon</li>
 <!--                    <li><a href="neutone/melda_phaser_quasiperiodic.nm" download="melda_phaser_quasiperiodic.nm">Melda Phaser LSTM-64</a> (trained on quasiperiodic LFO)</li>-->
@@ -1925,6 +1930,31 @@
 <!--                    <li><a href="neutone/egfx_phaser.nm" download="egfx_phaser.nm">EGFx Phaser LSTM-64</a></li>-->
 <!--                    <li><a href="neutone/egfx_flanger.nm" download="egfx_flanger.nm">EGFx Flanger LSTM-64</a> (was not modeled successfully)</li>-->
 <!--                    <li><a href="neutone/egfx_chorus.nm" download="egfx_chorus.nm">EGFx Chorus LSTM-64</a> (was not modeled successfully)</li>-->
+                </ul>
+                <h4>Time-varying Subtractive Synthesizer</h4>
+
+                <h6>Synth Files</h6>
+                <ul>
+                    <li><b><a href="neutone/acid_synth_lp_td/model.nm" download="acid_synth_lp_td.nm">Acid Synth LP TD</a></b> (synth only, no model)</li>
+                    <li><a href="neutone/acid_synth_lp_fs_128/model.nm" download="acid_synth_lp_fs_128.nm">Acid Synth LP FS 128</a> (synth only, no model)</li>
+                </ul>
+                <h6>Model Files</h6>
+                <ul>
+                    <li><b><a href="neutone/acid_synth_model_coeff_td__cnn_mss_coeff_td__abstract_303_48k__6k__4k_min__epoch_199_step_1200/model.nm" download="acid_synth_model_coeff_td.nm">Acid Synth Model Coeff TD (ours)</a></b></li>
+                    <li><a href="neutone/acid_synth_model_coeff_fs__cnn_mss_coeff_fs_128__abstract_303_48k__6k__4k_min__epoch_143_step_864/model.nm" download="acid_synth_model_coeff_fs_128.nm">Acid Synth Model Coeff FS 128</a></li>
+                    <li><a href="neutone/acid_synth_model_coeff_fs__cnn_mss_coeff_fs_256__abstract_303_48k__6k__4k_min__epoch_159_step_960/model.nm" download="acid_synth_model_coeff_fs_256.nm">Acid Synth Model Coeff FS 256</a></li>
+                    <li><a href="neutone/acid_synth_model_coeff_fs__cnn_mss_coeff_fs_512__abstract_303_48k__6k__4k_min__epoch_191_step_1152/model.nm" download="acid_synth_model_coeff_fs_512.nm">Acid Synth Model Coeff FS 512</a></li>
+                    <li><a href="neutone/acid_synth_model_coeff_fs__cnn_mss_coeff_fs_1024__abstract_303_48k__6k__4k_min__epoch_167_step_1008/model.nm" download="acid_synth_model_coeff_fs_1024.nm">Acid Synth Model Coeff FS 1024</a></li>
+                    <li><a href="neutone/acid_synth_model_coeff_fs__cnn_mss_coeff_fs_2048__abstract_303_48k__6k__4k_min__epoch_159_step_960/model.nm" download="acid_synth_model_coeff_fs_2048.nm">Acid Synth Model Coeff FS 2048</a></li>
+                    <li><a href="neutone/acid_synth_model_coeff_fs__cnn_mss_coeff_fs_4096__abstract_303_48k__6k__4k_min__epoch_167_step_1008/model.nm" download="acid_synth_model_coeff_fs_4096.nm">Acid Synth Model Coeff FS 4096</a></li>
+                    <li><b><a href="neutone/acid_synth_model_lp_td__cnn_mss_lp_td__abstract_303_48k__6k__4k_min__epoch_183_step_1104/model.nm" download="acid_synth_model_lp_td.nm">Acid Synth Model LP TD (ours)</a></b></li>
+                    <li><a href="neutone/acid_synth_model_lp_fs__cnn_mss_lp_fs_128__abstract_303_48k__6k__4k_min__epoch_183_step_1104/model.nm" download="acid_synth_model_lp_fs_128.nm">Acid Synth Model LP FS 128</a></li>
+                    <li><a href="neutone/acid_synth_model_lp_fs__cnn_mss_lp_fs_256__abstract_303_48k__6k__4k_min__epoch_183_step_1104/model.nm" download="acid_synth_model_lp_fs_256.nm">Acid Synth Model LP FS 256</a></li>
+                    <li><a href="neutone/acid_synth_model_lp_fs__cnn_mss_lp_fs_512__abstract_303_48k__6k__4k_min__epoch_183_step_1104/model.nm" download="acid_synth_model_lp_fs_512.nm">Acid Synth Model LP FS 512</a></li>
+                    <li><a href="neutone/acid_synth_model_lp_fs__cnn_mss_lp_fs_1024__abstract_303_48k__6k__4k_min__epoch_135_step_816/model.nm" download="acid_synth_model_lp_fs_1024.nm">Acid Synth Model LP FS 1024</a></li>
+                    <li><a href="neutone/acid_synth_model_lp_fs__cnn_mss_lp_fs_2048__abstract_303_48k__6k__4k_min__epoch_135_step_816/model.nm" download="acid_synth_model_lp_fs_2048.nm">Acid Synth Model LP FS 2048</a></li>
+                    <li><a href="neutone/acid_synth_model_lp_fs__cnn_mss_lp_fs_4096__abstract_303_48k__6k__4k_min__epoch_135_step_816/model.nm" download="acid_synth_model_lp_fs_4096.nm">Acid Synth Model LP FS 4096</a></li>
+                    <li><a href="neutone/acid_synth_model_rnn_td__cnn_mss_lstm_64__abstract_303_48k__6k__4k_min__epoch_175_step_1056/model.nm" download="acid_synth_model_lstm_64.nm">Acid Synth Model LSTM 64</a></li>
                 </ul>
             </div>
         </div>
