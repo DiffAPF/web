@@ -1904,32 +1904,27 @@
                     <li>Open the plugin in your preferred digital audio workstation.</li>
                     <li>Click on "load your own" at the top of the Neutone FX plugin interface and select one of the models you just downloaded.</li>
                     <li>Use the four custom knobs to control the model.</li>
-
-<!--                    <li>-->
-<!--                        Use the four custom knobs to control the model:-->
-<!--                        <ul>-->
-<!--                            <li>Knob A: LFO rate (0.1 to 5 Hz)</li>-->
-<!--                            <li>Knob B: LFO depth (0.0 to 1.5)</li>-->
-<!--                            <li>Knob C: LFO stereo phase offset (0 to 360 degrees)</li>-->
-<!--                            <li>Knob D: Unused</li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
                 </ol>
-<!--                <p>-->
-<!--                For best results we recommend setting the input gain knob to -6 dB to avoid clipping, setting your-->
-<!--                DAW's sample rate to the native sample rate of the models (44.1 kHz), and using a buffer size of 128-->
-<!--                samples or more.-->
-<!--                </p>-->
                 <h4>Phaser</h4>
+                <p>
+                    We provide the trained phaser model files for the six different parameter configurations explored in the paper.
+                    The phaser is controlled as follows:
                 <ul>
-                    <li>Coming soon</li>
-<!--                    <li><a href="neutone/melda_phaser_quasiperiodic.nm" download="melda_phaser_quasiperiodic.nm">Melda Phaser LSTM-64</a> (trained on quasiperiodic LFO)</li>-->
-<!--                    <li><a href="neutone/melda_flanger_quasiperiodic.nm" download="melda_flanger_quasiperiodic.nm">Melda Flanger LSTM-64</a> (trained on quasiperiodic LFO)</li>-->
-<!--                    <li><a href="neutone/melda_phaser_irregular.nm" download="melda_phaser_irregular.nm">Melda Phaser LSTM-64</a> (trained on irregular LFO)</li>-->
-<!--                    <li><a href="neutone/melda_flanger_irregular.nm" download="melda_flanger_irregular.nm">Melda Flanger LSTM-64</a> (trained on irregular LFO)</li>-->
-<!--                    <li><a href="neutone/egfx_phaser.nm" download="egfx_phaser.nm">EGFx Phaser LSTM-64</a></li>-->
-<!--                    <li><a href="neutone/egfx_flanger.nm" download="egfx_flanger.nm">EGFx Flanger LSTM-64</a> (was not modeled successfully)</li>-->
-<!--                    <li><a href="neutone/egfx_chorus.nm" download="egfx_chorus.nm">EGFx Chorus LSTM-64</a> (was not modeled successfully)</li>-->
+                    <li>Knob A: LFO rate (0.1 Hz to 5 Hz)</li>
+                    <li>Knob B: LFO stereo offset (0 to 2π)</li>
+                </ul>
+                We recommend setting your DAW sampling rate to 44.1 kHz and using an M1 Pro MacBook or better for best results.
+                We plan on adding an optimized, TorchScriptable C++ extension for our filter implementation in the near future.
+                </p>
+
+                <h5>Phaser Neutone Files</h5>
+                <ul>
+                    <li><b><a href="neutone/phaser_model_ss-a_td/model.nm" download="phaser_model_ss-a_td.nm">SS-A TD</a></b> (feedback off, rate knob 3 o’clock (f0 ≈ 2.3 Hz))</li>
+                    <li><b><a href="neutone/phaser_model_ss-b_td/model.nm" download="phaser_model_ss-b_td.nm">SS-B TD</a></b> (feedback off, rate knob 12 o’clock (f0 ≈ 0.6 Hz))</li>
+                    <li><b><a href="neutone/phaser_model_ss-c_td/model.nm" download="phaser_model_ss-c_td.nm">SS-C TD</a></b> (feedback off, rate knob 9 o’clock (f0 ≈ 0.09 Hz))</li>
+                    <li><b><a href="neutone/phaser_model_ss-d_td/model.nm" download="phaser_model_ss-d_td.nm">SS-D TD</a></b> (feedback on, rate knob 3 o’clock (f0 ≈ 1.4 Hz))</li>
+                    <li><b><a href="neutone/phaser_model_ss-e_td/model.nm" download="phaser_model_ss-e_td.nm">SS-E TD</a></b> (feedback on, rate knob 12 o’clock (f0 ≈ 0.4 Hz))</li>
+                    <li><b><a href="neutone/phaser_model_ss-f_td/model.nm" download="phaser_model_ss-f_td.nm">SS-F TD</a></b> (feedback on, rate knob 9 o’clock (f0 ≈ 0.06 Hz))</li>
                 </ul>
             </div>
         </div>
@@ -1948,7 +1943,7 @@
             Due to the 4 parameter limit, the synth has fixed note on duration, oscillator gain, oscillator shape, and distortion gain parameters.
             All parameter values, ranges, and controllability can be modified by editing and running <a href="https://github.com/DiffAPF/TB-303/blob/main/scripts/export_neutone_synth.py" target=”_blank”><code>scripts/export_neutone_synth.py</code></a>.
             </p>
-            <h6>Synth Files</h6>
+            <h5>Acid Synth Neutone Files</h5>
             <ul>
                 <li><b><a href="neutone/acid_synth_lp_td/model.nm" download="acid_synth_lp_td.nm">Acid Synth LP TD</a></b> (synth only, no model)</li>
                 <li><a href="neutone/acid_synth_lp_fs_128/model.nm" download="acid_synth_lp_fs_128.nm">Acid Synth LP FS 128</a> (synth only, no model)</li>
@@ -1968,7 +1963,7 @@
             For now, it is recommended to set your DAW's sampling rate to 48 kHz and buffer size to 512 samples or greater for the best performance possible when using these models.
             </p>
 
-            <h6>Model Files</h6>
+            <h5>Acid Synth Model Neutone Files</h5>
             <ul>
                 <li><b><a href="neutone/acid_synth_model_coeff_td__cnn_mss_coeff_td__abstract_303_48k__6k__4k_min__epoch_199_step_1200/model.nm" download="acid_synth_model_coeff_td.nm">Acid Synth Model Coeff TD (ours)</a></b></li>
                 <li><a href="neutone/acid_synth_model_coeff_fs__cnn_mss_coeff_fs_128__abstract_303_48k__6k__4k_min__epoch_143_step_864/model.nm" download="acid_synth_model_coeff_fs_128.nm">Acid Synth Model Coeff FS 128</a></li>
