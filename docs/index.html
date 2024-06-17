@@ -91,11 +91,11 @@
             <p>
                 Infinite impulse response filters are an essential building block of many time-varying audio systems, such as audio effects and synthesisers.
                 However, their recursive structure impedes end-to-end training of these systems using automatic differentiation.
-                Although non-recursive filter approximations like frequency sampling and frame-based processing have been proposed and widely used in previous works, they are approximations and cannot accurately reflect the gradient of the original system.
+                Although non-recursive filter approximations like frequency sampling and frame-based processing have been proposed and widely used in previous works, they cannot accurately reflect the gradient of the original system.
                 We alleviate this difficulty by re-expressing a time-varying all-pole filter to backpropagate the gradients through itself, so the filter implementation is not bound to the technical limitations of automatic differentiation frameworks.
-                This implementation can be employed within any audio system containing filters with poles for efficient gradient evaluation.
+                This implementation can be employed within audio systems containing filters with poles for efficient gradient evaluation.
                 We demonstrate its training efficiency and expressive capabilities for modelling real-world dynamic audio systems on a phaser, time-varying subtractive synthesiser, and feed-forward compressor.
-                We make our code available and provide the trained audio effect and synth models in a VST plugin.
+                We make our code and audio samples available and provide the trained audio effect and synth models in a VST plugin.
             </p>
             <br>
             <img class="img-fluid" src="img/filter_diagram.svg">
@@ -344,6 +344,7 @@
                 <p>
                     For our second experiment, we use our time domain filter to model the Roland TB-303 Bass Line synthesizer which defined the <a href="https://www.roland.com/uk/promos/303day/" target="_blank">acid house electronic music movement</a> of the late 1980s.
                     The TB-303 is an ideal synth for our use case because its defining feature is a resonant low-pass filter where the cutoff frequency is modulated quickly using an envelope to create its signature squelchy, “liquid” sound.
+                    Although the original TB-303's circuit contains a 4-pole diode ladder filter, for simplicity and demonstration purposes, we implement our synthesiser using a biquad filter.
                     We model it using the time-varying subtractive synth architecture shown in Figure 3 which consists of three main components: a monophonic oscillator, a time-varying biquad filter, and a waveshaper for adding distortion to the output.
                     The dataset is made from Sample Science’s royalty free <a href="https://www.samplescience.info/2022/05/abstract-303.html" target="_blank">Abstract 303 sample pack</a> consisting of 100 synth loops at 120 BPM recorded dry from a hardware TB-303 clone.
                 </p>
